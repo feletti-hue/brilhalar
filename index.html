@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FaxinaJá — Encontre sua faxineira</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(135deg, #5b21b6, #7c3aed);
+      color: white;
+      padding: 20px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #7c3aed, #9333ea);
+      color: white;
+      text-align: center;
+      padding: 75px 20px 90px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      margin-bottom: 30px;
+    }
+
+    .search-box {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 12px;
+      border-radius: 12px;
+      display: flex;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      color: #333;
+    }
+
+    button {
+      border: none;
+      background: #5b21b6;
+      color: white;
+      padding: 14px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #4c1d95;
+    }
+
+    .section {
+      padding: 55px 6%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h2 {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 35px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+      transition: transform .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .avatar {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background: #ede9fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+    }
+
+    .cidade {
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .rating {
+      color: #f59e0b;
+      margin-bottom: 15px;
+    }
+
+    .preco {
+      font-size: 20px;
+      font-weight: bold;
+      color: #5b21b6;
+      margin-bottom: 18px;
+    }
+
+    .como-funciona {
+      background: white;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      text-align: center;
+    }
+
+    .step {
+      padding: 25px;
+    }
+
+    .step-icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .cadastro {
+      background: #ede9fe;
+      text-align: center;
+      border-radius: 20px;
+      padding: 50px 25px;
+    }
+
+    .cadastro h2 {
+      margin-bottom: 15px;
+    }
+
+    .cadastro p {
+      margin-bottom: 25px;
+    }
+
+    footer {
+      background: #18181b;
+      color: white;
+      text-align: center;
+      padding: 30px;
+      margin-top: 40px;
+    }
+
+    .mensagem {
+      text-align: center;
+      margin-top: 25px;
+      font-weight: bold;
+      color: #5b21b6;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        justify-content: center;
+        text-align: center;
+      }
+
+      nav a {
+        margin: 0 8px;
+        font-size: 14px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box input,
+      .search-box button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">🧹 FaxinaJá</div>
+
+    <nav>
+      <a href="#profissionais">Profissionais</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#cadastro">Cadastre-se</a>
+    </nav>
+  </header>
+
+
+  <section class="hero">
+
+    <h1>Encontre uma faxineira de confiança</h1>
+
+    <p>
+      Encontre profissionais para cuidar da limpeza da sua casa.
+    </p>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="cidade"
+        placeholder="Digite sua cidade ou bairro"
+      >
+
+      <button onclick="buscar()">
+        Procurar
+      </button>
+    </div>
+
+    <div class="mensagem" id="mensagem"></div>
+
+  </section>
+
+
+  <section class="section" id="profissionais">
+
+    <h2>Profissionais disponíveis</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="avatar">👩🏽</div>
+
+        <h3>Maria Silva</h3>
+
+        <div class="cidade">
+          📍 Belo Horizonte - MG
+        </div>
+
+        <div class="rating">
+          ★★★★★ 4,9
+        </div>
+
+        <p>
+          Limpeza residencial, organização e limpeza pesada.
+        </p>
+
+        <div class="preco">
+          A partir de R$ 150
+        </div>
+
+        <button onclick="contatar('Maria Silva')">
+          Entrar em contato
+        </button>
+      </div>
+
+
+      <div class="card">
+        <div class="avatar">👩🏾</div>
+
+        <h3>Juliana Souza</h3>
+
+        <div class="cidade">
+          📍 Belo Horizonte - MG
+        </div>
+
+        <div class="rating">
+          ★★★★★ 4,8
+        </div>
+
+        <p>
+          Faxina completa, cozinha, banheiro e organização.
+        </p>
+
+        <div class="preco">
+          A partir de R$ 140
+        </div>
+
+        <button onclick="contatar('Juliana Souza')">
+          Entrar em contato
+        </button>
+      </div>
+
+
+      <div class="card">
+        <div class="avatar">👩🏻</div>
+
+        <h3>Ana Paula</h3>
+
+        <div class="cidade">
+          📍 Contagem - MG
+        </div>
+
+        <div class="rating">
+          ★★★★★ 4,9
+        </div>
+
+        <p>
+          Limpeza residencial e pós-obra.
+        </p>
+
+        <div class="preco">
+          A partir de R$ 180
+        </div>
+
+        <button onclick="contatar('Ana Paula')">
+          Entrar em contato
+        </button>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="como-funciona" id="como-funciona">
+
+    <div class="section">
+
+      <h2>Como funciona?</h2>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-icon">🔎</div>
+          <h3>1. Procure</h3>
+          <p>
+            Informe sua cidade ou região.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-icon">👩‍🔧</div>
+          <h3>2. Escolha</h3>
+          <p>
+            Veja profissionais e avaliações.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-icon">📱</div>
+          <h3>3. Entre em contato</h3>
+          <p>
+            Combine diretamente o serviço.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-icon">🏠</div>
+          <h3>4. Receba a faxina</h3>
+          <p>
+            Combine data, horário e preço.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="section" id="cadastro">
+
+    <div class="cadastro">
+
+      <h2>Você trabalha com faxina?</h2>
+
+      <p>
+        Cadastre-se gratuitamente e encontre novos clientes.
+      </p>
+
+      <button onclick="cadastrar()">
+        Quero ser uma profissional
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+
+    <p>
+      © 2026 FaxinaJá — Conectando clientes e profissionais.
+    </p>
+
+    <p style="margin-top:10px;">
+      Feito para facilitar a contratação de serviços de limpeza.
+    </p>
+
+  </footer>
+
+
+  <script>
+
+    function buscar() {
+
+      const cidade =
+        document.getElementById("cidade").value.trim();
+
+      const mensagem =
+        document.getElementById("mensagem");
+
+      if (cidade === "") {
+
+        mensagem.innerText =
+          "Digite uma cidade ou bairro para pesquisar.";
+
+        mensagem.style.display = "block";
+
+        return;
+      }
+
+      mensagem.innerText =
+        "Buscando profissionais em " + cidade + "...";
+
+      mensagem.style.display = "block";
+
+      setTimeout(function() {
+
+        document.getElementById("profissionais")
+          .scrollIntoView({
+            behavior: "smooth"
+          });
+
+      }, 500);
+    }
+
+
+    function contatar(nome) {
+
+      alert(
+        "Você escolheu entrar em contato com " +
+        nome +
+        ".\n\nEm breve esta função poderá abrir o WhatsApp da profissional."
+      );
+
+    }
+
+
+    function cadastrar() {
+
+      alert(
+        "Área de cadastro de profissionais.\n\n" +
+        "Aqui podemos criar posteriormente um formulário " +
+        "para a faxineira cadastrar nome, cidade, telefone, " +
+        "preço e serviços."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
